@@ -12,10 +12,10 @@ public class CompletedRideImpl implements CompletedRide {
 
     public CompletedRideImpl(RideRequest request, Driver driver) {
         if (request == null || driver == null) {
-      
-        	throw new RuntimeException("Completed Ride FUCK YOU");
+            throw new RuntimeException("Need to specify request and/or driver");
         }
-    	this.request = request;
+        this.waitTime = driver.getVehicle().getPosition().getManhattanDistanceTo(request.getClientPosition());
+        this.request = request;
         this.driver = driver;
     }
 
@@ -39,10 +39,8 @@ public class CompletedRideImpl implements CompletedRide {
 
     @Override
     public int getWaitTime() {
-        Position driverPosition = this.driver.getVehicle().getPosition();
-        Position clientPosition = this.request.getClientPosition();
         // distance = time?
-        return driverPosition.getManhattanDistanceTo(clientPosition);
+        return this.waitTime;
     }
 
     @Override
@@ -60,7 +58,7 @@ public class CompletedRideImpl implements CompletedRide {
     @Override
     public double getPrice() {
         if (this.getWaitTime() < 25) {
-            return ((2.5) * (this.request.getRideTime()) );
+            return ((2.5) * (this.request.getRideTime()));
         } else if (this.getWaitTime() >= 25 && this.getWaitTime() <= 49) {
             return ((2.0) * this.request.getRideTime());
         } else if (this.getWaitTime() >= 50 && this.getWaitTime() <= 99) {

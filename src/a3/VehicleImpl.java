@@ -10,9 +10,9 @@ public class VehicleImpl implements Vehicle {
 
     public VehicleImpl(String make, String model, String plate, Position position) {
         if (make == null || model == null || plate == null || position == null) {
-        	throw new RuntimeException("");
+            throw new RuntimeException("Need to specify make, model, plate, and/or position");
         }
-    	this.make = make;
+        this.make = make;
         this.model = model;
         this.plate = plate;
         this.position = position;
@@ -62,9 +62,9 @@ public class VehicleImpl implements Vehicle {
 
     @Override
     public void moveToPosition(Position p) {
-    	if (p == null) {
-    		throw new RuntimeException("");
-    	}
+        if (p == null) {
+            throw new RuntimeException("");
+        }
         int distance = this.position.getManhattanDistanceTo(p);
         this.mileage += distance;
         this.position = p;

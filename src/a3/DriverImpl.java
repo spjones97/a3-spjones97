@@ -1,6 +1,6 @@
 package a3;
 
-public class DriverImpl implements Driver{
+public class DriverImpl implements Driver {
 
     private String firstName;
     private String lastName;
@@ -8,15 +8,15 @@ public class DriverImpl implements Driver{
     private Vehicle vehicle;
 
     public DriverImpl(String first, String last, int id, Vehicle vehicle) {
-        if (first == null || last == null || vehicle == null ) {
-        	throw new RuntimeException("Driver FUCK YOU");
+        if (first == null || last == null || vehicle == null) {
+            throw new RuntimeException("Need to specify first, last, id, and/or vehicle");
         }
 
-    	this.firstName = first;
+        this.firstName = first;
         this.lastName = last;
         this.id = id;
         this.vehicle = vehicle;
-	}
+    }
 
     @Override
     public String getFirstName() {
@@ -38,9 +38,9 @@ public class DriverImpl implements Driver{
 
     @Override
     public String getFullName() {
-    	if (this.firstName == null || this.lastName == null) {
+        if (this.firstName == null || this.lastName == null) {
             throw new RuntimeException("Need to specify first name");
-    	}
+        }
         return this.getFirstName() + " " + this.getLastName();
     }
 
@@ -60,9 +60,9 @@ public class DriverImpl implements Driver{
 
     @Override
     public void setVehicle(Vehicle v) {
-    	if (v == null) {
-    		throw new RuntimeException("");
-    	}
+        if (v == null) {
+            throw new RuntimeException("");
+        }
         this.vehicle = v;
     }
 }

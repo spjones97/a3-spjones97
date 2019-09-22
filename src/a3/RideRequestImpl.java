@@ -8,11 +8,12 @@ public class RideRequestImpl implements RideRequest {
     private int rideTime;
 
     public RideRequestImpl(Position clientPosition, Position destination) {
-        if (clientPosition == null || destination == null ) {
-        	throw new RuntimeException ("");
+        if (clientPosition == null || destination == null) {
+            throw new RuntimeException("Need to specify client position and/or destination");
         }
-    	this.clientPosition = clientPosition;
+        this.clientPosition = clientPosition;
         this.destination = destination;
+        this.rideTime = clientPosition.getManhattanDistanceTo(destination);
         this.isComplete = false;
     }
 
@@ -36,40 +37,42 @@ public class RideRequestImpl implements RideRequest {
 
     @Override
     public boolean getIsComplete() {
-    	return this.isComplete;
-    	
+        return this.isComplete;
+
     }
 
     @Override
-    public CompletedRide complete(Driver driver) { 
-    	if (driver == null) {
-    		throw new RuntimeException("");
-    	}
+    public CompletedRide complete(Driver driver) {
+        if (driver == null) {
+            throw new RuntimeException("Need to specify driver");
+        }
         if (!this.getIsComplete()) {
-        	//Sets ride to complete
-        	
-        	// this.isComplete = true;
-        	
-        	//Create a new CompletedRide Object
-        	CompletedRide rideObject = new CompletedRideImpl(this, driver);
-            //Move the vehicle of the driver to the client
-        	driver.getVehicle().moveToPosition(this.getClientPosition());
-        	//Move the client to dest
-            //this.clientPosition = this.getDestination();
-            //Move the driver to dest
+            // Sets ride to complete
+            this.isComplete = true;
+
+            // Create a new CompletedRide Object
+            CompletedRide rideObject = new CompletedRideImpl(this, driver);
+
+            // Move the vehicle of the driver to the client
+            driver.getVehicle().moveToPosition(this.getClientPosition());
+
+            // Move the client to dest
+            // this.clientPosition = this.getDestination();
+
+            // Move the driver to dest
             driver.getVehicle().moveToPosition(this.getDestination());
-            
+
             return rideObject;
         } else {
-        	//Return Ride Object
-        	CompletedRide rideObject = new CompletedRideImpl(this, driver);
-        	return rideObject;
+            // Return Ride Object
+            CompletedRide rideObject = new CompletedRideImpl(this, driver);
+            return rideObject;
         }
 
     }
 
     @Override
     public int getRideTime() {
-        return this.clientPosition.getManhattanDistanceTo(this.destination);
+        return this.rideTime;
     }
 }
