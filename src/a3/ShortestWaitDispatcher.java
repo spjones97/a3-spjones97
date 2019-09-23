@@ -3,43 +3,44 @@
 // import java.util.Arrays;
 
 // /*
-//  * This dispatcher should choose the driver that is closest to the client's
-//  * position (i.e. will incur the shortest wait time.
-//  */
+// * This dispatcher should choose the driver that is closest to the client's
+// * position (i.e. will incur the shortest wait time.
+// */
 
 // public class ShortestWaitDispatcher implements Dispatcher {
 
-//     private Driver[] availableDrivers;
-//     private RideRequest rideRequest;
+// private Driver[] availableDrivers;
+// private RideRequest rideRequest;
 
-//     public ShortestWaitDispatcher() {
+// public ShortestWaitDispatcher() {
 
-//     }
+// }
 
-//     @Override
-//     public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
-//         // TODO Auto-generated method stub
-//         int[] distanceArr = new int[availableDrivers.length];
-//         int j = 0;
+// @Override
+// public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
+// // TODO Auto-generated method stub
+// int[] distanceArr = new int[availableDrivers.length];
+// int j = 0;
 
-//         // Create array of distances
-//         for (Driver i : availableDrivers) {
-//             distanceArr[j] = i.getVehicle().getPosition().getManhattanDistanceTo(request.getClientPosition());
-//             j++;
-//         }
+// // Create array of distances
+// for (Driver i : availableDrivers) {
+// distanceArr[j] =
+// i.getVehicle().getPosition().getManhattanDistanceTo(request.getClientPosition());
+// j++;
+// }
 
-//         // Find driver with minimum distance
-//         int min = 10000;
-//         Driver minDriver = availableDrivers[0];
-//         for (int i = 0; i < availableDrivers.length; i++) {
-//             if (distanceArr[i] < min) {
-//                 min = distanceArr[i];
-//                 minDriver = availableDrivers[i];
-//             }
-//         }
+// // Find driver with minimum distance
+// int min = 10000;
+// Driver minDriver = availableDrivers[0];
+// for (int i = 0; i < availableDrivers.length; i++) {
+// if (distanceArr[i] < min) {
+// min = distanceArr[i];
+// minDriver = availableDrivers[i];
+// }
+// }
 
-//         return minDriver;
-//     }
+// return minDriver;
+// }
 // }
 
 package a3;
@@ -67,19 +68,11 @@ public class ShortestWaitDispatcher implements Dispatcher {
     @Override
     public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
 
-        // Subtract wait time from each driver
-        for (int i = 0; i < availableDrivers.length; i++) {
-            availableDrivers[i].round();
-        }
-
         // Create array list of drivers with no wait time
         ArrayList<Driver> driverArrayList = new ArrayList<Driver>();
         int arrayIndex = 0;
         for (int i = 0; i < availableDrivers.length; i++) {
-            if (availableDrivers[i].getDriverWaitTime() <= 0) {
-                driverArrayList.add(availableDrivers[arrayIndex]);
-                arrayIndex++;
-            }
+            driverArrayList.add(availableDrivers[i]);
         }
 
         // Create integer array of distances
