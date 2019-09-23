@@ -26,9 +26,18 @@ package a3;
 
 public interface Driver {
 	String getFirstName();
+
 	String getLastName();
+
 	String getFullName();
+
 	int getID();
+
 	Vehicle getVehicle();
+
 	void setVehicle(Vehicle v);
+
+	int getDriverWaitTime();
+
+	void round();
 }
