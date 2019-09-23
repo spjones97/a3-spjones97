@@ -6,7 +6,6 @@ public class DriverImpl implements Driver {
     private String lastName;
     private int id;
     private Vehicle vehicle;
-    private int driverWaitTime;
 
     public DriverImpl(String first, String last, int id, Vehicle vehicle) {
         if (first == null || last == null || vehicle == null) {
@@ -17,7 +16,6 @@ public class DriverImpl implements Driver {
         this.lastName = last;
         this.id = id;
         this.vehicle = vehicle;
-        this.driverWaitTime = 0;
     }
 
     @Override
@@ -66,15 +64,5 @@ public class DriverImpl implements Driver {
             throw new RuntimeException("");
         }
         this.vehicle = v;
-    }
-
-    @Override
-    public int getDriverWaitTime() {
-        // TODO Auto-generated method stub
-        return this.driverWaitTime;
-    }
-
-    public void round() {
-        this.driverWaitTime = this.driverWaitTime - 1;
     }
 }

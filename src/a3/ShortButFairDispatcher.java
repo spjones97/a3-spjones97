@@ -25,6 +25,7 @@ public class ShortButFairDispatcher implements Dispatcher {
         // TODO Auto-generated method stub
 
         int[] distanceArr = new int[availableDrivers.length];
+        int[] driverWaitTime = new int[availableDrivers.length];
         int j = 0;
 
         // Create an array of distances
@@ -36,17 +37,22 @@ public class ShortButFairDispatcher implements Dispatcher {
         // Find driver with shortest distance and no wait time
         int minDistance = 10000;
         Driver minDriver = availableDrivers[0];
+        int index = 0;
         for (int i = 0; i < availableDrivers.length; i++) {
-            if (distanceArr[i] < minDistance && availableDrivers[i].getDriverWaitTime() <= 0) {
-                minDriver = availableDrivers[i];
+            if (distanceArr[i] < minDistance && driverWaitTime[i] <= 0) {
                 minDistance = distanceArr[i];
+                minDriver = availableDrivers[i];
+                index = i;
             }
         }
 
         // Drop each driver wait time by 1
         for (int i = 0; i < availableDrivers.length; i++) {
-            availableDrivers[i].round();
+            driverWaitTime[i] = driverWaitTime[i] - 1;
         }
+
+        // Add wait time to chosen driver
+        driverWaitTime[index] = 5;
 
         return minDriver;
     }
