@@ -17,7 +17,7 @@ public class DriverImpl implements Driver {
         this.lastName = last;
         this.id = id;
         this.vehicle = vehicle;
-        // this.driverWaitTime = 0;
+        this.driverWaitTime = 0;
     }
 
     @Override
@@ -83,7 +83,7 @@ public class DriverImpl implements Driver {
 
     @Override
     public void addWaitTime() {
-        this.driverWaitTime = 5;
+        this.driverWaitTime = 6;
 
     }
 }
