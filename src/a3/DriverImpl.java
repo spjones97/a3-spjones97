@@ -75,7 +75,9 @@ public class DriverImpl implements Driver {
 
     @Override
     public void round() {
-        this.driverWaitTime = this.driverWaitTime - 1;
+        if (this.getDriverWaitTime() > 0) {
+            this.driverWaitTime = this.driverWaitTime - 1;
+        }
 
     }
 
