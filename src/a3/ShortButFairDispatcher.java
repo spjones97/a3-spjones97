@@ -30,11 +30,9 @@ public class ShortButFairDispatcher implements Dispatcher {
 
         // Create array list of drivers with no wait time
         ArrayList<Driver> driverArrayList = new ArrayList<Driver>();
-        int arrayIndex = 0;
         for (int i = 0; i < availableDrivers.length; i++) {
             if (availableDrivers[i].getDriverWaitTime() <= 0) {
-                driverArrayList.add(availableDrivers[arrayIndex]);
-                arrayIndex++;
+                driverArrayList.add(availableDrivers[i]);
             }
         }
 
