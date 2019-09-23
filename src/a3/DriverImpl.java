@@ -17,7 +17,7 @@ public class DriverImpl implements Driver {
         this.lastName = last;
         this.id = id;
         this.vehicle = vehicle;
-        this.driverWaitTime = 0;
+        // this.driverWaitTime = 0;
     }
 
     @Override
