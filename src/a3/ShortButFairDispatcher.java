@@ -41,7 +41,7 @@ public class ShortButFairDispatcher implements Dispatcher {
         // Create integer array of distances
         int[] distanceArr = new int[driverArrayList.size()];
         for (int i = 0; i < driverArrayList.size(); i++) {
-            distanceArr[i] = availableDrivers[i].getVehicle().getPosition()
+            distanceArr[i] = driverArrayList.get(i).getVehicle().getPosition()
                     .getManhattanDistanceTo(request.getClientPosition());
         }
 
