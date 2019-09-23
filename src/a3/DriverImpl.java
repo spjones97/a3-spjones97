@@ -83,7 +83,7 @@ public class DriverImpl implements Driver {
 
     @Override
     public void addWaitTime() {
-        this.driverWaitTime = 6;
+        this.driverWaitTime = 5;
 
     }
 }
