@@ -36,4 +36,10 @@ public interface Driver {
 	Vehicle getVehicle();
 
 	void setVehicle(Vehicle v);
+
+	int getDriverWaitTime();
+
+	void round();
+
+	void addWaitTime();
 }

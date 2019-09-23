@@ -24,36 +24,62 @@ public class ShortButFairDispatcher implements Dispatcher {
     public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
         // TODO Auto-generated method stub
 
-        int[] distanceArr = new int[availableDrivers.length];
-        int[] driverWaitTime = new int[availableDrivers.length];
-        int j = 0;
-
-        // Create an array of distances
-        for (Driver i : availableDrivers) {
-            distanceArr[j] = i.getVehicle().getPosition().getManhattanDistanceTo(request.getClientPosition());
-            j++;
-        }
-
-        // Find driver with shortest distance and no wait time
-        int minDistance = 10000;
-        Driver minDriver = availableDrivers[0];
-        int index = 0;
+        // Create array list of drivers with not wait time
+        ArrayList<Driver> driverArrayList = new ArrayList<Driver>();
         for (int i = 0; i < availableDrivers.length; i++) {
-            if (distanceArr[i] < minDistance && driverWaitTime[i] <= 0) {
-                minDistance = distanceArr[i];
-                minDriver = availableDrivers[i];
-                index = i;
+            if (availableDrivers[i].getDriverWaitTime() <= 0) {
+                driverArrayList.add(availableDrivers[i]);
             }
         }
 
-        // Drop each driver wait time by 1
+        // Create integer array of distances
+        int[] distanceArr = new int[driverArrayList.size()];
+        for (int i = 0; i < driverArrayList.size(); i++) {
+            distanceArr[i] = availableDrivers[i].getVehicle().getPosition()
+                    .getManhattanDistanceTo(request.getClientPosition());
+        }
+
+        // Find driver with minimum distance
+        int minDistance = Integer.MAX_VALUE;
+        Driver minDriver = availableDrivers[0];
+        for (int i = 0; i < driverArrayList.size(); i++) {
+            if (distanceArr[i] < minDistance) {
+                minDistance = distanceArr[i];
+                minDriver = driverArrayList.get(i);
+            }
+        }
+
+        // Subtract wait time from each driver
         for (int i = 0; i < availableDrivers.length; i++) {
-            driverWaitTime[i] = driverWaitTime[i] - 1;
+            availableDrivers[i].round();
         }
 
         // Add wait time to chosen driver
-        driverWaitTime[index] = 4;
+        minDriver.addWaitTime();
 
         return minDriver;
+
+        /*
+         * int[] distanceArr = new int[availableDrivers.length]; int[] driverWaitTime =
+         * new int[availableDrivers.length]; int j = 0;
+         * 
+         * // Create an array of distances for (Driver i : availableDrivers) {
+         * distanceArr[j] =
+         * i.getVehicle().getPosition().getManhattanDistanceTo(request.getClientPosition
+         * ()); j++; }
+         * 
+         * // Find driver with shortest distance and no wait time int minDistance =
+         * 10000; Driver minDriver = availableDrivers[0]; int index = 0; for (int i = 0;
+         * i < availableDrivers.length; i++) { if (distanceArr[i] < minDistance &&
+         * driverWaitTime[i] <= 0) { minDistance = distanceArr[i]; minDriver =
+         * availableDrivers[i]; index = i; } }
+         * 
+         * // Drop each driver wait time by 1 for (int i = 0; i <
+         * availableDrivers.length; i++) { driverWaitTime[i] = driverWaitTime[i] - 1; }
+         * 
+         * // Add wait time to chosen driver driverWaitTime[index] = 4;
+         * 
+         * return minDriver;
+         */
     }
 }
