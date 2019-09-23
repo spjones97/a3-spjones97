@@ -23,6 +23,11 @@ public class ShortButFairDispatcher implements Dispatcher {
     @Override
     public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
 
+        // Subtract wait time from each driver
+        for (int i = 0; i < availableDrivers.length; i++) {
+            availableDrivers[i].round();
+        }
+
         // Create array list of drivers with no wait time
         ArrayList<Driver> driverArrayList = new ArrayList<Driver>();
         int arrayIndex = 0;
@@ -48,11 +53,6 @@ public class ShortButFairDispatcher implements Dispatcher {
                 minDistance = distanceArr[i];
                 minDriver = driverArrayList.get(i);
             }
-        }
-
-        // Subtract wait time from each driver
-        for (int i = 0; i < availableDrivers.length; i++) {
-            availableDrivers[i].round();
         }
 
         // Add wait time to chosen driver
