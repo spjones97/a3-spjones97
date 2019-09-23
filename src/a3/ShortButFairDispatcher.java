@@ -52,7 +52,7 @@ public class ShortButFairDispatcher implements Dispatcher {
         }
 
         // Add wait time to chosen driver
-        driverWaitTime[index] = 5;
+        driverWaitTime[index] = 4;
 
         return minDriver;
     }
