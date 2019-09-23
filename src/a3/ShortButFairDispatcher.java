@@ -46,7 +46,7 @@ public class ShortButFairDispatcher implements Dispatcher {
 
         // Drop each driver wait time by 1
         for (int i = 0; i < availableDrivers.length; i++) {
-            driverWaitTime[i] -= 1;
+            driverWaitTime[i] = driverWaitTime[i] - 1;
         }
 
         return minDriver;
