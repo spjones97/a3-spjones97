@@ -22,13 +22,14 @@ public class ShortButFairDispatcher implements Dispatcher {
 
     @Override
     public Driver chooseDriver(Driver[] availableDrivers, RideRequest request) {
-        // TODO Auto-generated method stub
 
-        // Create array list of drivers with not wait time
+        // Create array list of drivers with no wait time
         ArrayList<Driver> driverArrayList = new ArrayList<Driver>();
+        int arrayIndex = 0;
         for (int i = 0; i < availableDrivers.length; i++) {
             if (availableDrivers[i].getDriverWaitTime() <= 0) {
-                driverArrayList.add(availableDrivers[i]);
+                driverArrayList.add(availableDrivers[arrayIndex]);
+                arrayIndex++;
             }
         }
 
