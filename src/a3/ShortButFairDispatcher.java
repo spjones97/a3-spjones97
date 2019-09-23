@@ -39,7 +39,7 @@ public class ShortButFairDispatcher implements Dispatcher {
         Driver minDriver = availableDrivers[0];
         for (int i = 0; i < availableDrivers.length; i++) {
             if (distanceArr[i] < minDistance && driverWaitTime[i] <= 0) {
-                driverWaitTime[i] = 5;
+                driverWaitTime[i] = 4;
                 minDriver = availableDrivers[i];
             }
         }
