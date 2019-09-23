@@ -56,7 +56,6 @@ public class ShortButFairDispatcher implements Dispatcher {
         }
 
         // Add wait time to chosen driver
-        System.out.println(minDriver);
         minDriver.addWaitTime();
 
         return minDriver;
